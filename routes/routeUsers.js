@@ -1,5 +1,5 @@
 const express = require('express');
-const User = require('../model/modelUser');
+const User = require('../models/modelUser');
 const router = express.Router();
 
 //Lấy thông tin người dùng

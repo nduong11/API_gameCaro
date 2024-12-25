@@ -1,5 +1,5 @@
 const express = require('express');
-const Room = require('../model/modelRoom');
+const Room = require('../models/modelRoom');
 const router = express.Router();
 
 // Trả về danh sách phòng
