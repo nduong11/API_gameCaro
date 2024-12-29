@@ -39,13 +39,14 @@ router.get('/rooms/:roomId', async (req, res) =>{
 
 // Tạo phòng
 router.post('/createRoom', async (req, res) => {
-  const { roomName, roomType, playerLeft, playerRight, turnGame } = req.body;
+  const { roomName, roomType, playerLeft, turnGame } = req.body;
   try {
     // Sinh ID ngẫu nhiên và đảm bảo không bị trùng
     const roomId = await generateUniqueIdWithCheck();
     console.log(typeof roomId); // 
     // Tạo Room
-    const room = new Room({ roomId, roomName, roomType, playerLeft, playerRight, turnGame });
+    const room = new Room({ roomId, roomName, roomType, playerLeft, turnGame });
+    room.playerRight = 'null';
     console.log(room)
     await room.save();
     res.json({ message: 'Room created successfully!!', room });

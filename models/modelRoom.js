@@ -19,8 +19,7 @@ const modelRooms = new mongoose.Schema({
         required: true
     },
     playerRight: {
-        type: String,
-        required: true
+        type: String
     },
     game: {
         type: [Number],
