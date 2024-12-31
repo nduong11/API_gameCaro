@@ -55,6 +55,25 @@ router.post('/createRoom', async (req, res) => {
   }
 });
 
+// Xóa phòng theo ID
+router.delete('/rooms/:roomId', async (req, res) => {
+  const { roomId } = req.params;
+
+  try {
+    // Tìm và xóa phòng dựa trên roomId
+    const deletedRoom = await Room.findOneAndDelete({ roomId });
+
+    if (!deletedRoom) {
+      return res.status(404).json({ message: 'Room not found' });
+    }
+
+    res.status(200).json({ message: 'Room deleted successfully', deletedRoom });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+
 // Check ID đã tồn tại chưa
 const generateUniqueIdWithCheck = async () => {
   let id;
