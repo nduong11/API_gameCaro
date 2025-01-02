@@ -3,11 +3,11 @@ const User = require('../models/modelUser');
 const router = express.Router();
 
 //Lấy thông tin người dùng
-router.get('/user/:email', async (req, res) => {
-  const { email } = req.params;
+router.get('/user/:username', async (req, res) => {
+  const { username } = req.params;
   try {
-    // Tìm người dùng theo Email
-    const user = await User.findOne({ email }).select('-password');
+    // Tìm người dùng theo Username
+    const user = await User.findOne({ username }).select('-password');
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -21,16 +21,16 @@ router.get('/user/:email', async (req, res) => {
 
 // Đăng ký
 router.post('/register', async (req, res) => {
-  const { name, email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
     // Kiểm tra xem email có tồn tại không
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ username });
     if (existingUser) {
-      return res.status(400).json({ message: 'Email already exists' });
+      return res.status(400).json({ message: 'Username already exists' });
     }
     // Nếu email không tồn tại 
-    const user = new User({ name, email, password });
+    const user = new User({ username, password });
     await user.save();
     res.status(201).json({ message: 'User registered successfully!',user});
   } catch (error) {
@@ -43,7 +43,7 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ username });
     if (!user) return res.status(404).json({ message: 'User not found' });
 
     const isMatch = await user.comparePassword(password);
