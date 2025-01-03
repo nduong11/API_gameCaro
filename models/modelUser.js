@@ -10,6 +10,7 @@ const modelUsers = new mongoose.Schema({
     },
     email: {
         type: String,
+        default: 'null'
     },
     password: {
         type: String,

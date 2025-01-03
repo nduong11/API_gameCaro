@@ -24,12 +24,12 @@ router.post('/register', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // Kiểm tra xem email có tồn tại không
+    // Kiểm tra xem username có tồn tại không
     const existingUser = await User.findOne({ username });
     if (existingUser) {
       return res.status(400).json({ message: 'Username already exists' });
     }
-    // Nếu email không tồn tại 
+    // Nếu username không tồn tại 
     const user = new User({ username, password });
     await user.save();
     res.status(201).json({ message: 'User registered successfully!',user});
@@ -40,7 +40,7 @@ router.post('/register', async (req, res) => {
 
 // Đăng nhập
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
     const user = await User.findOne({ username });
