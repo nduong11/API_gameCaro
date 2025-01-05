@@ -14,7 +14,7 @@ router.get('/rooms', async (req, res) =>{
     }
 
     // Trả về danh sách phòng
-    res.json({ message: 'Rooms retrieved successfully', rooms });
+    res.status(200).json({ message: 'Rooms retrieved successfully', rooms });
   } catch (error) {
     // Nếu có lỗi trong quá trình truy vấn
     res.status(500).json({ message: 'Server error', error: error.message });
@@ -49,7 +49,7 @@ router.post('/createRoom', async (req, res) => {
     room.playerRight = 'null';
     console.log(room)
     await room.save();
-    res.json({ message: 'Room created successfully!!', room });
+    res.status(200).json({ message: 'Room created successfully!!', room });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }

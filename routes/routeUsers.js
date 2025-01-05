@@ -32,7 +32,7 @@ router.post('/register', async (req, res) => {
     // Nếu username không tồn tại 
     const user = new User({ username, password });
     await user.save();
-    res.status(201).json({ message: 'User registered successfully!',user});
+    res.status(200).json({ message: 'User registered successfully!',user});
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -48,7 +48,7 @@ router.post('/login', async (req, res) => {
 
     const isMatch = await user.comparePassword(password);
     if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
-    res.json({ message: 'User has logged in successfully!'});
+    res.status(200).json({ message: 'User has logged in successfully!'});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
