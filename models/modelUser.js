@@ -6,7 +6,7 @@ const currentDate = new Date();
 const modelUsers = new mongoose.Schema({
     username: {
         type: String,
-        required: true
+        required: true,
     },
     email: {
         type: String,
