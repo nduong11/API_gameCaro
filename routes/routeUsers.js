@@ -63,7 +63,7 @@ router.put('/users/avatar', async (req, res) => {
   const { username, avatar } = req.body;
 
   try {
-    const updatedAvatar = await Image.findByIdAndUpdate(
+    const updatedAvatar = await User.findByIdAndUpdate(
       username,
       { avatar: avatar },
       { new: true } // Trả về dữ liệu sau khi cập nhật
