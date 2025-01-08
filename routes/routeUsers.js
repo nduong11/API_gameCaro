@@ -3,7 +3,7 @@ const User = require('../models/modelUser');
 const router = express.Router();
 
 //Lấy thông tin người dùng
-router.get('/user/:username', async (req, res) => {
+router.get('/users/:username', async (req, res) => {
   const { username } = req.params;
   try {
     // Tìm người dùng theo Username
@@ -57,5 +57,29 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+// Update avatar
+router.put('/users/avatar', async (req, res) => {
+  const { username, avatar } = req.body;
+
+  try {
+    const updatedAvatar = await Image.findByIdAndUpdate(
+      username,
+      { avatar: avatar },
+      { new: true } // Trả về dữ liệu sau khi cập nhật
+    );
+    if (!updatedAvatar) {
+      return res.status(404).json({ error: 'Username not found' });
+    }
+
+    res.status(200).json({
+        message: 'Avatar updated successfully!',
+        updatedAvatar,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 
 module.exports = router;

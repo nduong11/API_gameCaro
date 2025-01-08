@@ -16,6 +16,10 @@ const modelUsers = new mongoose.Schema({
         type: String,
         required: true
     },
+    avatar:{
+        type: String,
+        default: 'assets/images/defaultAvatar.jpg'
+    },
     time: {
         type: String,
         default: `${currentDate.getDay()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`,
