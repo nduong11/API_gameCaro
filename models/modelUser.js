@@ -22,7 +22,7 @@ const modelUsers = new mongoose.Schema({
     },
     time: {
         type: String,
-        default: `${currentDate.getDay()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`,
+        default: `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`,
     }
 });
 
