@@ -18,6 +18,21 @@ router.get('/users/:username', async (req, res) => {
   }
 });
 
+// Trả về thông tin avatar theo username
+router.get('/users/avatar/:username', async (req, res) =>{
+  const { username } = req.params;
+  try {
+    // Tìm người dùng theo Email
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ message: 'No user found' });
+    }
+    // Trả về thông tin người dùng
+    res.status(200).json(user.avatar);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
 
 // Đăng ký
 router.post('/register', async (req, res) => {
