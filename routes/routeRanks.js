@@ -44,10 +44,10 @@ router.put('/rank', async (req, res) => {
             const newRank = new Rank({ username, game });
             newRank.score += score
             await newRank.save();
-            res.status(200).json({ message: 'Rank updated successfully!!', newRank });
+            return res.status(200).json({ message: 'Rank updated successfully!!', newRank });
         }
         rank.score += score;
-        await newRank.save();
+        await rank.save();
         res.status(200).json({ message: 'Rank updated successfully!!', rank });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
