@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const routeUsers = require('./routes/routeUsers.js');
 const routeRooms = require('./routes/routeRooms.js');
+const routeRanks = require('./routes/routeRanks.js');
 const app = express();
 require('dotenv').config();
 
@@ -36,6 +37,7 @@ mongoose.connect(process.env.MONGO_URI, {
 app.get('/', (req, res) => {res.send('Hello, World!');});
 app.use('/api', routeUsers);
 app.use('/api', routeRooms);
+app.user('/api', routeRanks);
 
 // Start Server
 const PORT = process.env.PORT || 7000;
