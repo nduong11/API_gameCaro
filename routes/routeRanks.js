@@ -42,12 +42,12 @@ router.put('/rank', async (req, res) => {
         const rank = await Rank.findOne({ username, game });
         if (!rank) {
             const newRank = new Rank({ username, game });
-            await newRank.save();
             newRank.score += score
+            await newRank.save();
             res.status(200).json({ message: 'Rank updated successfully!!', newRank });
         }
         rank.score += score;
-        
+        await newRank.save();
         res.status(200).json({ message: 'Rank updated successfully!!', rank });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
