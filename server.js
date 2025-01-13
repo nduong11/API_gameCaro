@@ -37,7 +37,7 @@ mongoose.connect(process.env.MONGO_URI, {
 app.get('/', (req, res) => {res.send('Hello, World!');});
 app.use('/api', routeUsers);
 app.use('/api', routeRooms);
-app.user('/api', routeRanks);
+app.use('/api', routeRanks);
 
 // Start Server
 const PORT = process.env.PORT || 7000;
